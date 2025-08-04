@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Collection Items - Hammerspace{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <div>
+            <h1 class="card-title" id="collection-title">Collection Items</h1>
+            <p class="text-muted" id="collection-description"></p>
+        </div>
+        <button id="new-item-btn" class="btn btn-primary">+ Add Item</button>
+    </div>
+    <div id="items-grid" class="grid grid-3">
+        <!-- Items will be loaded here -->
+    </div>
+    <div id="no-items" class="text-center text-muted" style="display: none;">
+        <p>No items in this collection yet.</p>
+        <p>Add your first item to get started!</p>
+    </div>
+</div>
+
+<!-- New Item Modal -->
+<div id="item-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="item-modal-title">New Item</h2>
+            <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="item-form">
+                <div class="form-group">
+                    <label for="item-name">Name</label>
+                    <input type="text" id="item-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="item-description">Description</label>
+                    <textarea id="item-description" name="description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="item-visibility">Visibility</label>
+                    <select id="item-visibility" name="visibility">
+                        <option value="collection">Same as Collection</option>
+                        <option value="private">Private</option>
+                        <option value="public">Public</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="custom-fields">Custom Fields (JSON)</label>
+                    <textarea id="custom-fields" name="custom_fields" rows="5" placeholder='{"author": "Example Author", "pages": 300, "genre": "Fiction"}'></textarea>
+                    <small class="text-muted">Enter custom fields as JSON. Example for books: author, pages, genre, etc.</small>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="item-submit">Add Item</button>
+                    <button type="button" class="btn btn-secondary" id="item-cancel">Cancel</button>
+                </div>
+            </form>
+            <div id="item-error" class="error-message" style="display: none;"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Item Actions Modal -->
+<div id="item-actions-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Item Actions</h2>
+            <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-actions">
+                <button id="edit-item-btn" class="btn btn-secondary">Edit Item</button>
+                <button id="delete-item-btn" class="btn btn-danger">Delete Item</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="{% static 'js/items.js' %}"></script>
+{% endblock %}

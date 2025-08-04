@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Hammerspace - Collection Manager{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="/">🔨 Hammerspace</a>
+            </div>
+            <div class="nav-menu">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/collections/" class="nav-link">My Collections</a>
+                <a href="/public/" class="nav-link">Discover</a>
+                <div class="nav-user">
+                    <span id="user-name" class="user-name" style="display: none;"></span>
+                    <button id="auth-btn" class="btn btn-primary">Login</button>
+                    <button id="logout-btn" class="btn btn-secondary" style="display: none;">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="auth-modal-title">Login</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="auth-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" style="display: none;">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div class="form-group" id="password-confirm-group" style="display: none;">
+                        <label for="password-confirm">Confirm Password</label>
+                        <input type="password" id="password-confirm" name="password_confirm">
+                    </div>
+                    <div class="form-group" style="display: none;" id="name-fields">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="first_name">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="last_name">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="auth-submit">Login</button>
+                        <button type="button" class="btn btn-link" id="auth-toggle">
+                            Don't have an account? Register
+                        </button>
+                    </div>
+                </form>
+                <div id="auth-error" class="error-message" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading indicator -->
+    <div id="loading" class="loading" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Notification system -->
+    <div id="notifications" class="notifications"></div>
+
+    <script type="module" src="{% static 'js/types.js' %}"></script>
+    <script type="module" src="{% static 'js/api.js' %}"></script>
+    <script type="module" src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

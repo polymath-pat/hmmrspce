@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Collections - Hammerspace{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title">My Collections</h1>
+        <button id="new-collection-btn" class="btn btn-primary">+ New Collection</button>
+    </div>
+    <div id="collections-grid" class="grid grid-2">
+        <!-- Collections will be loaded here -->
+    </div>
+    <div id="no-collections" class="text-center text-muted" style="display: none;">
+        <p>You don't have any collections yet.</p>
+        <p>Create your first collection to get started!</p>
+    </div>
+</div>
+
+<!-- New Collection Modal -->
+<div id="collection-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="collection-modal-title">New Collection</h2>
+            <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="collection-form">
+                <div class="form-group">
+                    <label for="collection-name">Name</label>
+                    <input type="text" id="collection-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="collection-description">Description</label>
+                    <textarea id="collection-description" name="description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="collection-visibility">Visibility</label>
+                    <select id="collection-visibility" name="visibility">
+                        <option value="private">Private - Only you can see this</option>
+                        <option value="unlisted">Unlisted - Accessible with direct link</option>
+                        <option value="public">Public - Everyone can see this</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="collection-submit">Create Collection</button>
+                    <button type="button" class="btn btn-secondary" id="collection-cancel">Cancel</button>
+                </div>
+            </form>
+            <div id="collection-error" class="error-message" style="display: none;"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Collection Actions Modal -->
+<div id="collection-actions-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Collection Actions</h2>
+            <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-actions">
+                <button id="view-collection-btn" class="btn btn-primary">View Items</button>
+                <button id="edit-collection-btn" class="btn btn-secondary">Edit Collection</button>
+                <button id="share-collection-btn" class="btn btn-success">Share Collection</button>
+                <button id="delete-collection-btn" class="btn btn-danger">Delete Collection</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Share Collection Modal -->
+<div id="share-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Share Collection</h2>
+            <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="share-form">
+                <div class="form-group">
+                    <label for="share-username">Username</label>
+                    <input type="text" id="share-username" name="shared_with_username" required>
+                </div>
+                <div class="form-group">
+                    <label for="share-permission">Permission Level</label>
+                    <select id="share-permission" name="permission_level">
+                        <option value="view">View Only</option>
+                        <option value="edit">Can Edit Items</option>
+                        <option value="manage">Can Manage Collection</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Share</button>
+                    <button type="button" class="btn btn-secondary modal-close">Cancel</button>
+                </div>
+            </form>
+            <div id="share-error" class="error-message" style="display: none;"></div>
+            
+            <div id="existing-shares" class="mt-2">
+                <h3>Current Shares</h3>
+                <div id="shares-list">
+                    <!-- Existing shares will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="{% static 'js/collections.js' %}"></script>
+{% endblock %}

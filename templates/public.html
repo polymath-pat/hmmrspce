@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Public Collections - Hammerspace{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h1 class="card-title">🌐 Discover Public Collections</h1>
+        <p class="text-muted">Explore collections shared by the community</p>
+    </div>
+    <div id="public-collections-grid" class="grid grid-2">
+        <!-- Collections will be loaded here -->
+    </div>
+    <div id="no-public-collections" class="text-center text-muted" style="display: none;">
+        <p>No public collections yet.</p>
+        <p>Be the first to share your collection with the community!</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="{% static 'js/public.js' %}"></script>
+{% endblock %}

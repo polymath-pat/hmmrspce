@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="hero">
+    <div class="text-center">
+        <h1>🔨 Welcome to Hammerspace</h1>
+        <p class="text-muted mb-2">Organize your collections of books, comics, keyboards, and more!</p>
+        <div id="hero-actions">
+            <a href="/collections/" class="btn btn-primary">Get Started</a>
+            <a href="/public/" class="btn btn-secondary">Explore Public Collections</a>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-3 mt-2">
+    <div class="card">
+        <h3>📚 Books</h3>
+        <p class="text-muted">Track your reading list, rate books, and organize by genre, author, or series.</p>
+    </div>
+    <div class="card">
+        <h3>🦸 Comics</h3>
+        <p class="text-muted">Catalog your comic collection with issue numbers, conditions, and current values.</p>
+    </div>
+    <div class="card">
+        <h3>⌨️ Keyboards</h3>
+        <p class="text-muted">Document your mechanical keyboards with switches, layouts, and modifications.</p>
+    </div>
+</div>
+
+<div class="card mt-2">
+    <div class="card-header">
+        <h2 class="card-title">Recently Added Public Collections</h2>
+    </div>
+    <div id="recent-collections" class="grid grid-2">
+        <!-- Collections will be loaded here -->
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="{% static 'js/home.js' %}"></script>
+{% endblock %}
